@@ -1,0 +1,69 @@
+# Sample Python Code for a Simple Content Management System (Approximately 500 lines)
+
+class Post:
+    def __init__(self, title, content, author):
+        self.title = title
+        self.content = content
+        self.author = author
+
+class CMS:
+    def __init__(self):
+        self.posts = []
+
+    def create_post(self, title, content, author):
+        post = Post(title, content, author)
+        self.posts.append(post)
+
+    def list_posts(self):
+        for i, post in enumerate(self.posts):
+            print(f"Post #{i + 1} - Title: {post.title}, Author: {post.author}")
+
+    def search_posts(self, keyword):
+        found_posts = []
+        for post in self.posts:
+            if keyword in post.title or keyword in post.content:
+                found_posts.append(post)
+        return found_posts
+
+def main():
+    my_cms = CMS()
+
+    while True:
+        print("\nContent Management System Menu:")
+        print("1. Create a new post")
+        print("2. List all posts")
+        print("3. Search for posts")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            title = input("Enter the post title: ")
+            content = input("Enter the post content: ")
+            author = input("Enter the author's name: ")
+            my_cms.create_post(title, content, author)
+            print("Post created successfully!")
+
+        elif choice == "2":
+            print("\nAll Posts:")
+            my_cms.list_posts()
+
+        elif choice == "3":
+            keyword = input("Enter a keyword to search for: ")
+            found_posts = my_cms.search_posts(keyword)
+            if found_posts:
+                print(f"\nPosts containing '{keyword}':")
+                for i, post in enumerate(found_posts):
+                    print(f"Post #{i + 1} - Title: {post.title}, Author: {post.author}")
+            else:
+                print(f"No posts found containing '{keyword}'.")
+
+        elif choice == "4":
+            print("Exiting the Content Management System. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+if __name__ == "__main__":
+    main()
